@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://bb2av3e2g68yk"]
+
+[ext_resource type="Script" path="res://control.gd" id="1_ti1ip"]
+[ext_resource type="Script" path="res://device_selection.gd" id="2_fi446"]
+[ext_resource type="Script" path="res://volume_input.gd" id="3_jd38h"]
+[ext_resource type="Script" path="res://volume_selection.gd" id="4_iywbx"]
+[ext_resource type="Script" path="res://time_selection.gd" id="5_57cv8"]
+[ext_resource type="Script" path="res://decay_bar.gd" id="5_a1dob"]
+[ext_resource type="Script" path="res://scream_selection.gd" id="5_qjmoy"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ti1ip")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 381.0
+offset_bottom = 122.0
+
+[node name="device_selection" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_fi446")
+
+[node name="volume_input" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+script = ExtResource("3_jd38h")
+
+[node name="volume_selection" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("4_iywbx")
+
+[node name="scream_selection" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("5_qjmoy")
+
+[node name="decay_bar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+script = ExtResource("5_a1dob")
+
+[node name="decay_timer" type="Timer" parent="VBoxContainer/decay_bar"]
+one_shot = true
+
+[node name="time_selection" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("5_57cv8")
+
+[connection signal="talk_volume_reached" from="." to="VBoxContainer/decay_bar" method="_on_control_talk_volume_reached"]
+[connection signal="value_changed" from="VBoxContainer/volume_input" to="." method="_on_volume_input_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/volume_selection" to="." method="_on_volume_selection_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/volume_selection" to="VBoxContainer/scream_selection" method="_on_volume_selection_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/scream_selection" to="." method="_on_scream_selection_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/decay_bar" to="." method="_on_decay_bar_value_changed"]
+[connection signal="timeout" from="VBoxContainer/decay_bar/decay_timer" to="VBoxContainer/volume_input" method="_on_decay_timer_timeout"]
+[connection signal="timeout" from="VBoxContainer/decay_bar/decay_timer" to="VBoxContainer/decay_bar" method="_on_decay_timer_timeout"]
+[connection signal="value_changed" from="VBoxContainer/time_selection" to="." method="_on_time_selection_value_changed"]

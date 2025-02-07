@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://0dpnqfep462o"]
+
+[ext_resource type="Texture2D" uid="uid://s7j8q2wwuxuh" path="res://Base 1.png" id="1_aqcmf"]
+[ext_resource type="Script" path="res://vtuber.gd" id="1_h08pn"]
+[ext_resource type="Texture2D" uid="uid://btqg848i0rr8d" path="res://Base 4.png" id="2_7hkmq"]
+[ext_resource type="Texture2D" uid="uid://ceytjh2qxllan" path="res://Angy 1.png" id="4_46y33"]
+[ext_resource type="Texture2D" uid="uid://bps2jybhy762h" path="res://Angy 4.png" id="5_hj46q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vmmy4"]
+radius = 121.438
+height = 368.876
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uxj2h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_aqcmf")
+}],
+"loop": true,
+"name": &"Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7hkmq")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_46y33")
+}],
+"loop": true,
+"name": &"Scream",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_hj46q")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Vtuber" type="CharacterBody2D"]
+script = ExtResource("1_h08pn")
+BOUNCE_VELOCITY = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(946.562, 430.562)
+shape = SubResource("CapsuleShape2D_vmmy4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(947, 431)
+scale = Vector2(0.179688, 0.179688)
+sprite_frames = SubResource("SpriteFrames_uxj2h")
+animation = &"new_animation"
