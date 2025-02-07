@@ -9,6 +9,7 @@ var time_slider
 var decay_value
 var talking = false
 var screaming = false
+var menu = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +23,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#print(talking)
+	if Input.is_action_just_pressed("menu"):
+		if menu:
+			self.visible = true
+			menu = false
+		else: 
+			self.visible = false
+			menu = true
 	if mic_input != null:
 		if mic_input >= mic_slider:
 			emit_signal("talk_volume_reached")
@@ -50,3 +58,7 @@ func _on_decay_bar_value_changed(value):
 
 func _on_scream_selection_value_changed(value):
 	scream_slider = value
+
+
+func _on_area_2d_mouse_entered():
+	print("entered")

@@ -49,11 +49,11 @@ animations = [{
 script = ExtResource("1_h08pn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(946.562, 430.562)
+position = Vector2(0.562531, 0.562531)
 shape = SubResource("CapsuleShape2D_vmmy4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(947, 431)
+position = Vector2(1.00052, 1.00052)
 scale = Vector2(0.179688, 0.179688)
 sprite_frames = SubResource("SpriteFrames_uxj2h")
 animation = &"Angry Open"

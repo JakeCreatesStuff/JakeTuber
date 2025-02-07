@@ -6,13 +6,13 @@
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_f6plc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kb3nj"]
-distance = -648.0
+distance = -520.0
 
 [node name="main" type="Node2D"]
 
 [node name="Vtuber" parent="." node_paths=PackedStringArray("input") instance=ExtResource("1_5nwn8")]
+position = Vector2(594, 301)
 input = NodePath("../Control")
-BOUNCE_VELOCITY = -200
 
 [node name="mic input" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMicrophone_f6plc")
