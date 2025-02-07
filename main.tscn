@@ -12,6 +12,7 @@ distance = -648.0
 
 [node name="Vtuber" parent="." node_paths=PackedStringArray("input") instance=ExtResource("1_5nwn8")]
 input = NodePath("../Control")
+BOUNCE_VELOCITY = -200
 
 [node name="mic input" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMicrophone_f6plc")

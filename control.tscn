@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bb2av3e2g68yk"]
+[gd_scene load_steps=6 format=3 uid="uid://bb2av3e2g68yk"]
 
 [ext_resource type="Script" path="res://control.gd" id="1_ti1ip"]
 [ext_resource type="Script" path="res://device_selection.gd" id="2_fi446"]
 [ext_resource type="Script" path="res://volume_input.gd" id="3_jd38h"]
 [ext_resource type="Script" path="res://volume_selection.gd" id="4_iywbx"]
-[ext_resource type="Script" path="res://time_selection.gd" id="5_57cv8"]
 [ext_resource type="Script" path="res://decay_bar.gd" id="5_a1dob"]
-[ext_resource type="Script" path="res://scream_selection.gd" id="5_qjmoy"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -39,7 +37,6 @@ script = ExtResource("4_iywbx")
 layout_mode = 2
 max_value = 1.0
 step = 0.01
-script = ExtResource("5_qjmoy")
 
 [node name="decay_bar" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
@@ -53,7 +50,6 @@ one_shot = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
-script = ExtResource("5_57cv8")
 
 [connection signal="talk_volume_reached" from="." to="VBoxContainer/decay_bar" method="_on_control_talk_volume_reached"]
 [connection signal="value_changed" from="VBoxContainer/volume_input" to="." method="_on_volume_input_value_changed"]

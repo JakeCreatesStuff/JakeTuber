@@ -14,18 +14,10 @@ height = 368.876
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_aqcmf")
+"texture": ExtResource("5_hj46q")
 }],
 "loop": true,
-"name": &"Closed",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_7hkmq")
-}],
-"loop": true,
-"name": &"Open",
+"name": &"Angry Closed",
 "speed": 5.0
 }, {
 "frames": [{
@@ -33,21 +25,28 @@ animations = [{
 "texture": ExtResource("4_46y33")
 }],
 "loop": true,
-"name": &"Scream",
+"name": &"Angry Open",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_hj46q")
+"texture": ExtResource("1_aqcmf")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"Base Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7hkmq")
+}],
+"loop": true,
+"name": &"Base Open",
 "speed": 5.0
 }]
 
 [node name="Vtuber" type="CharacterBody2D"]
 script = ExtResource("1_h08pn")
-BOUNCE_VELOCITY = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(946.562, 430.562)
@@ -57,4 +56,10 @@ shape = SubResource("CapsuleShape2D_vmmy4")
 position = Vector2(947, 431)
 scale = Vector2(0.179688, 0.179688)
 sprite_frames = SubResource("SpriteFrames_uxj2h")
-animation = &"new_animation"
+animation = &"Angry Open"
+
+[node name="scream_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="scream_timer" to="." method="_on_scream_timer_timeout"]

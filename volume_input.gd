@@ -11,7 +11,7 @@ func _ready() -> void:
 	record_bus_index = AudioServer.get_bus_index("Record")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var sample = AudioServer.get_bus_peak_volume_left_db(record_bus_index, 0)
 	var linear_sample = db_to_linear(sample)
 	#print(linear_sample)
