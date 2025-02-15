@@ -1,7 +1,10 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://cdyxxu0c87rbc"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cdyxxu0c87rbc"]
 
 [sub_resource type="AudioEffectRecord" id="AudioEffectRecord_2iluc"]
 resource_name = "Record"
+
+[sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_6i7la"]
+resource_name = "SpectrumAnalyzer"
 
 [resource]
 bus/1/name = &"Output"
@@ -14,7 +17,9 @@ bus/2/name = &"Record"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = 0.0
+bus/2/volume_db = 0.0694828
 bus/2/send = &"Output"
 bus/2/effect/0/effect = SubResource("AudioEffectRecord_2iluc")
 bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource("AudioEffectSpectrumAnalyzer_6i7la")
+bus/2/effect/1/enabled = true

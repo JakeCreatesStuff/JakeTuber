@@ -15,60 +15,75 @@ var spoke = false
 var expression = 1
 var open = false
 var second_state = false
+var state_1 = "Base Closed"
+var state_2 = "Base Closed Blink"
+var state_3 = "Base Open"
+var state_4 = "Base Open Blink"
 
 func _ready():
 	pos = position.y
+	ElgatoStreamDeck.on_key_down.connect(_test)
 	
-func _physics_process(delta):
+func _process(delta):
 	velocity.y += gravity * delta
 	volume = input.mic_input
 	talking = input.talking
 	screaming = input.screaming
-	#print(pos)
-	pos = position.y
 	
+	if Input.is_action_just_pressed("state 1"):
+		expression = 1
+		expression_state()
+	elif  Input.is_action_just_pressed("state 2"):
+		expression = 2
+		expression_state()
+		
+	if Input.is_action_just_pressed("ScaleUp"):
+		scale.x = scale.x+0.02
+		scale.y = scale.y+0.02
+	elif Input.is_action_just_pressed("ScaleDown"):
+		scale.x = scale.x-0.02
+		scale.y = scale.y-0.02
+	elif Input.is_action_just_pressed("Reset"):
+		scale.x = 1
+		scale.y = 1
 	if talking:
-		#if !screaming:
-			#animated_sprite.play("Open")
-		#else:
-			#animated_sprite.play("Scream")
+		open = true
+		
 		if is_on_floor() and spoke == false:
 			velocity.y = BOUNCE_VELOCITY
 			spoke = true
-	else:
-		#animated_sprite.play("Closed")
-		spoke = false
-		
-	if Input.is_action_just_pressed("state 1"):
-		expression = 1
-	if Input.is_action_just_pressed("state 2"):
-		expression = 2
-	move_and_slide()
-	expression_state()
-	
-	
-func expression_state():
-	#print(second_state)
-	if talking:
-		open = true
+			
+		if screaming or second_state:
+			animated_sprite.play(state_4)
+			$scream_timer.start()
+			second_state = true
+		else:
+			animated_sprite.play(state_3)
+			
 	else:
 		open = false
+		spoke = false
+		
+		if second_state:
+			animated_sprite.play(state_2)
+		else:
+			animated_sprite.play(state_1)
+	move_and_slide()
+	
+func _test(message: String):
+	print("recieved")
+
+func expression_state():
+
 	match expression:
 		1:
-			if talking:
-				if screaming or second_state:
-					animated_sprite.play("Angry Open")
-					$scream_timer.start()
-					second_state = true
-				else:
-					animated_sprite.play("Base Open")
-			else:
-				if second_state:
-					animated_sprite.play("Angry Closed")
-				else:
-					animated_sprite.play("Base Closed")
+			state_1 = "Base Closed"
+			state_2 = "Base Closed Blink"
+			state_3 = "Base Open"
+			state_4 = "Base Open Blink"
+			print("state 1")
 		2:
-			pass
+			print("state 2")
 
 
 func _on_scream_timer_timeout():
