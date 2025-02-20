@@ -1,17 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://cm658svttj2ve"]
+[gd_scene load_steps=11 format=3 uid="uid://cm658svttj2ve"]
 
 [ext_resource type="PackedScene" uid="uid://0dpnqfep462o" path="res://vtuber.tscn" id="1_5nwn8"]
 [ext_resource type="PackedScene" uid="uid://bb2av3e2g68yk" path="res://control.tscn" id="2_4kbgp"]
 [ext_resource type="Script" path="res://mic_input.gd" id="3_gjwa7"]
 [ext_resource type="PackedScene" uid="uid://dggqc3fiqx26" path="res://mic_input.tscn" id="3_mydk1"]
+[ext_resource type="PackedScene" uid="uid://cqctcbpfdt0uk" path="res://chibi_head.tscn" id="5_6um5i"]
+[ext_resource type="Script" path="res://canvas_layer.gd" id="5_qxbxu"]
+[ext_resource type="PackedScene" uid="uid://ghfss5ycq8j5" path="res://speed_lines.tscn" id="6_dgn0j"]
+[ext_resource type="Script" path="res://body_scene.gd" id="7_yejed"]
+[ext_resource type="Texture2D" uid="uid://d1c3wlgpfwjx4" path="res://overhead_point-removebg-preview.png" id="9_4sr4t"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kb3nj"]
 
 [node name="main" type="Node2D"]
-
-[node name="Vtuber" parent="." node_paths=PackedStringArray("input") instance=ExtResource("1_5nwn8")]
-position = Vector2(992, 568)
-input = NodePath("../Control")
 
 [node name="mic input" parent="." instance=ExtResource("3_mydk1")]
 script = ExtResource("3_gjwa7")
@@ -19,16 +20,37 @@ script = ExtResource("3_gjwa7")
 [node name="Control" parent="." instance=ExtResource("2_4kbgp")]
 size_flags_horizontal = 4
 size_flags_vertical = 4
-metadata/_edit_use_anchors_ = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(989, 763)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("WorldBoundaryShape2D_kb3nj")
 
 [node name="Mic Refresh" type="Timer" parent="."]
 wait_time = 300.0
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("5_qxbxu")
+
+[node name="SpeedLines" parent="CanvasLayer" instance=ExtResource("6_dgn0j")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Chibi Head" parent="CanvasLayer2" instance=ExtResource("5_6um5i")]
+position = Vector2(1664, 256)
+
+[node name="BodyScene" type="Node2D" parent="."]
+position = Vector2(992, 568)
+script = ExtResource("7_yejed")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BodyScene"]
+position = Vector2(-3, 195)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyScene/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_kb3nj")
+
+[node name="Vtuber" parent="BodyScene" node_paths=PackedStringArray("input") instance=ExtResource("1_5nwn8")]
+input = NodePath("../../Control")
+
+[node name="OverheadPoint-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(-232, 592)
+texture = ExtResource("9_4sr4t")
 
 [connection signal="timeout" from="Mic Refresh" to="mic input" method="_on_mic_refresh_timeout"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqctcbpfdt0uk"]
+
+[ext_resource type="Script" path="res://chibi_head.gd" id="1_wrjw5"]
+[ext_resource type="Texture2D" uid="uid://bf3dc0b03vsai" path="res://head bubble whole ver 2.png" id="2_fwuwk"]
+[ext_resource type="Texture2D" uid="uid://buf6ryatoufrr" path="res://Soyjak emote.png" id="2_hncwx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yl2gf"]
+radius = 195.01
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g81a4"]
+atlas = ExtResource("2_fwuwk")
+region = Rect2(0, 0, 395, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atweq"]
+atlas = ExtResource("2_fwuwk")
+region = Rect2(395, 0, 395, 368)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ur7uf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g81a4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atweq")
+}],
+"loop": true,
+"name": &"bubble",
+"speed": 7.0
+}]
+
+[node name="Chibi Head" type="Area2D"]
+script = ExtResource("1_wrjw5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yl2gf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ur7uf")
+animation = &"bubble"
+frame_progress = 0.133576
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5, -6)
+rotation = -0.23911
+scale = Vector2(0.0852612, 0.0852612)
+texture = ExtResource("2_hncwx")

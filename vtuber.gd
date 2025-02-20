@@ -15,6 +15,10 @@ var spoke = false
 var expression = 1
 var open = false
 var second_state = false
+
+var chibi:bool = false
+var has_mouse:bool = false
+
 var state_1 = "Base Closed"
 var state_2 = "Base Closed Blink"
 var state_3 = "Base Open"
@@ -22,9 +26,9 @@ var state_4 = "Base Open Blink"
 
 func _ready():
 	pos = position.y
-	ElgatoStreamDeck.on_key_down.connect(_test)
+	ElgatoStreamDeck.on_key_down.connect(_chibi)
 	
-func _process(delta):
+func _physics_process(delta):
 	velocity.y += gravity * delta
 	volume = input.mic_input
 	talking = input.talking
@@ -36,16 +40,22 @@ func _process(delta):
 	elif  Input.is_action_just_pressed("state 2"):
 		expression = 2
 		expression_state()
+	
+	#Moved to BodyScene		
+	#if Input.is_action_just_pressed("ScaleUp"):
+		#scale.x = scale.x+0.02
+		#scale.y = scale.y+0.02
+	#elif Input.is_action_just_pressed("ScaleDown"):
+		#scale.x = scale.x-0.02
+		#scale.y = scale.y-0.02
+	#elif Input.is_action_just_pressed("Reset"):
+		#scale.x = 1
+		#scale.y = 1
 		
-	if Input.is_action_just_pressed("ScaleUp"):
-		scale.x = scale.x+0.02
-		scale.y = scale.y+0.02
-	elif Input.is_action_just_pressed("ScaleDown"):
-		scale.x = scale.x-0.02
-		scale.y = scale.y-0.02
-	elif Input.is_action_just_pressed("Reset"):
-		scale.x = 1
-		scale.y = 1
+	if Input.is_action_pressed("left_click") and has_mouse:
+		position = position.lerp(get_global_mouse_position(), 60*delta)
+		
+	
 	if talking:
 		open = true
 		
@@ -68,10 +78,16 @@ func _process(delta):
 			animated_sprite.play(state_2)
 		else:
 			animated_sprite.play(state_1)
+	
 	move_and_slide()
 	
-func _test(message: String):
-	print("recieved")
+func _chibi(message: String):
+	if chibi:
+		self.visible = false
+		chibi = false
+	else:
+		self.visible = true
+		chibi = true
 
 func expression_state():
 
@@ -89,3 +105,12 @@ func expression_state():
 func _on_scream_timer_timeout():
 	second_state = false
 	print("timer up")
+
+
+func _on_area_2d_mouse_entered():
+	has_mouse = true
+	print("entered")
+
+func _on_area_2d_mouse_exited():
+	has_mouse = false
+	print("exited")

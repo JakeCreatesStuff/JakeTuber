@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0dpnqfep462o"]
+[gd_scene load_steps=10 format=3 uid="uid://0dpnqfep462o"]
 
 [ext_resource type="Script" path="res://vtuber.gd" id="1_h08pn"]
 [ext_resource type="Texture2D" uid="uid://uiidet2jnnvo" path="res://Model Assets/Base_Closed.png" id="2_ae3vt"]
@@ -49,6 +49,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lsak7"]
+radius = 157.0
+height = 818.0
+
 [node name="Vtuber" type="CharacterBody2D"]
 script = ExtResource("1_h08pn")
 
@@ -66,4 +70,12 @@ animation = &"Base Closed"
 wait_time = 2.0
 one_shot = true
 
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_lsak7")
+
 [connection signal="timeout" from="scream_timer" to="." method="_on_scream_timer_timeout"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
