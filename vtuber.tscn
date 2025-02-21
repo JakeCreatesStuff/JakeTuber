@@ -57,6 +57,7 @@ height = 818.0
 script = ExtResource("1_h08pn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.562531, 0.562531)
 shape = SubResource("CapsuleShape2D_vmmy4")
 

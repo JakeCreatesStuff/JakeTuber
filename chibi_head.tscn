@@ -38,7 +38,7 @@ shape = SubResource("CircleShape2D_yl2gf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ur7uf")
 animation = &"bubble"
-frame_progress = 0.133576
+frame_progress = 0.0879471
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -6)

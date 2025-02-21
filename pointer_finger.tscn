@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuhw11csb1u15"]
+
+[ext_resource type="Script" path="res://pointer_finger.gd" id="1_acdkn"]
+[ext_resource type="Texture2D" uid="uid://d1c3wlgpfwjx4" path="res://overhead_point-removebg-preview.png" id="1_avud8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mf17h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_webxi"]
+atlas = ExtResource("1_avud8")
+region = Rect2(0, 0, 407, 612)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j6mjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_webxi")
+}],
+"loop": true,
+"name": &"pointer",
+"speed": 5.0
+}]
+
+[node name="PointerFinger" type="Area2D"]
+script = ExtResource("1_acdkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mf17h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(88, 248)
+rotation = -0.39968
+sprite_frames = SubResource("SpriteFrames_j6mjh")
+animation = &"pointer"

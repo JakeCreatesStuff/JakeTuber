@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cm658svttj2ve"]
+[gd_scene load_steps=12 format=3 uid="uid://cm658svttj2ve"]
 
 [ext_resource type="PackedScene" uid="uid://0dpnqfep462o" path="res://vtuber.tscn" id="1_5nwn8"]
 [ext_resource type="PackedScene" uid="uid://bb2av3e2g68yk" path="res://control.tscn" id="2_4kbgp"]
@@ -8,9 +8,13 @@
 [ext_resource type="Script" path="res://canvas_layer.gd" id="5_qxbxu"]
 [ext_resource type="PackedScene" uid="uid://ghfss5ycq8j5" path="res://speed_lines.tscn" id="6_dgn0j"]
 [ext_resource type="Script" path="res://body_scene.gd" id="7_yejed"]
-[ext_resource type="Texture2D" uid="uid://d1c3wlgpfwjx4" path="res://overhead_point-removebg-preview.png" id="9_4sr4t"]
+[ext_resource type="PackedScene" uid="uid://cuhw11csb1u15" path="res://pointer_finger.tscn" id="9_jgque"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kb3nj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6ipo"]
+radius = 104.0
+height = 768.0
 
 [node name="main" type="Node2D"]
 
@@ -36,6 +40,9 @@ script = ExtResource("5_qxbxu")
 [node name="Chibi Head" parent="CanvasLayer2" instance=ExtResource("5_6um5i")]
 position = Vector2(1664, 256)
 
+[node name="PointerFinger" parent="CanvasLayer2" instance=ExtResource("9_jgque")]
+position = Vector2(1312, 520)
+
 [node name="BodyScene" type="Node2D" parent="."]
 position = Vector2(992, 568)
 script = ExtResource("7_yejed")
@@ -49,8 +56,12 @@ shape = SubResource("WorldBoundaryShape2D_kb3nj")
 [node name="Vtuber" parent="BodyScene" node_paths=PackedStringArray("input") instance=ExtResource("1_5nwn8")]
 input = NodePath("../../Control")
 
-[node name="OverheadPoint-removebg-preview" type="Sprite2D" parent="."]
-position = Vector2(-232, 592)
-texture = ExtResource("9_4sr4t")
+[node name="Area2D" type="Area2D" parent="BodyScene"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyScene/Area2D"]
+position = Vector2(16, 0)
+shape = SubResource("CapsuleShape2D_n6ipo")
 
 [connection signal="timeout" from="Mic Refresh" to="mic input" method="_on_mic_refresh_timeout"]
+[connection signal="mouse_entered" from="BodyScene/Area2D" to="BodyScene" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="BodyScene/Area2D" to="BodyScene" method="_on_area_2d_mouse_exited"]

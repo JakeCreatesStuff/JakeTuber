@@ -26,6 +26,7 @@ var state_4 = "Base Open Blink"
 
 func _ready():
 	pos = position.y
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 	ElgatoStreamDeck.on_key_down.connect(_chibi)
 	
 func _physics_process(delta):
@@ -52,8 +53,8 @@ func _physics_process(delta):
 		#scale.x = 1
 		#scale.y = 1
 		
-	if Input.is_action_pressed("left_click") and has_mouse:
-		position = position.lerp(get_global_mouse_position(), 60*delta)
+	#if Input.is_action_pressed("left_click") and has_mouse:
+		#position = position.lerp(get_global_mouse_position(), 60*delta)
 		
 	
 	if talking:
@@ -83,9 +84,11 @@ func _physics_process(delta):
 	
 func _chibi(message: String):
 	if chibi:
+		Input.mouse_mode=Input.MOUSE_MODE_HIDDEN
 		self.visible = false
 		chibi = false
 	else:
+		Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 		self.visible = true
 		chibi = true
 
@@ -107,10 +110,10 @@ func _on_scream_timer_timeout():
 	print("timer up")
 
 
-func _on_area_2d_mouse_entered():
-	has_mouse = true
-	print("entered")
-
-func _on_area_2d_mouse_exited():
-	has_mouse = false
-	print("exited")
+#func _on_area_2d_mouse_entered():
+	#has_mouse = true
+	#print("entered")
+#
+#func _on_area_2d_mouse_exited():
+	#has_mouse = false
+	#print("exited")
