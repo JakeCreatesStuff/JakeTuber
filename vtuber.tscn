@@ -1,10 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://0dpnqfep462o"]
+[gd_scene load_steps=18 format=3 uid="uid://0dpnqfep462o"]
 
 [ext_resource type="Script" path="res://vtuber.gd" id="1_h08pn"]
-[ext_resource type="Texture2D" uid="uid://uiidet2jnnvo" path="res://Model Assets/Base_Closed.png" id="2_ae3vt"]
-[ext_resource type="Texture2D" uid="uid://cupft81hqtiv" path="res://Model Assets/Base_Closed_Blink.png" id="3_egjn0"]
-[ext_resource type="Texture2D" uid="uid://cc8hiyoecr2p8" path="res://Model Assets/Based_Open.png" id="4_8iter"]
-[ext_resource type="Texture2D" uid="uid://bhu7ybnt8chtb" path="res://Model Assets/Based_Open_Blink.png" id="5_olsnk"]
+[ext_resource type="Texture2D" uid="uid://uiidet2jnnvo" path="res://Model Assets/Base/Base_Closed.png" id="2_ae3vt"]
+[ext_resource type="Texture2D" uid="uid://cupft81hqtiv" path="res://Model Assets/Base/Base_Closed_Blink.png" id="3_egjn0"]
+[ext_resource type="Texture2D" uid="uid://cc8hiyoecr2p8" path="res://Model Assets/Base/Based_Open.png" id="4_8iter"]
+[ext_resource type="Texture2D" uid="uid://bhu7ybnt8chtb" path="res://Model Assets/Base/Based_Open_Blink.png" id="5_olsnk"]
+[ext_resource type="Texture2D" uid="uid://d0kxw8vwa6uvm" path="res://Model Assets/Fear/Fear_Closed.png" id="6_ffy70"]
+[ext_resource type="Texture2D" uid="uid://etwdo54kqhha" path="res://Model Assets/Fear/Fear_Closed_Blink.png" id="7_aufx3"]
+[ext_resource type="Texture2D" uid="uid://cp8ih6csgal8r" path="res://Model Assets/Fear/Fear_Open.png" id="8_pmtm2"]
+[ext_resource type="Texture2D" uid="uid://dc86jgu5h15ui" path="res://Model Assets/Fear/Fear_Open_Blink.png" id="9_hw2ce"]
+[ext_resource type="Texture2D" uid="uid://dlbiouatwo5oa" path="res://Model Assets/Panic/Panic_Closed.png" id="10_0gt2m"]
+[ext_resource type="Texture2D" uid="uid://bsv4hqvtqqmi7" path="res://Model Assets/Panic/Panic_Closed_Blink.png" id="11_h422y"]
+[ext_resource type="Texture2D" uid="uid://c2bkxe1yo2t7q" path="res://Model Assets/Panic/Panic_Open.png" id="12_plcq5"]
+[ext_resource type="Texture2D" uid="uid://bbwxbjtlyeixk" path="res://Model Assets/Panic/Panic_Open_Blink.png" id="13_yqieu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vmmy4"]
 radius = 121.438
@@ -47,6 +55,70 @@ animations = [{
 "loop": true,
 "name": &"Base Open Blink",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ffy70")
+}],
+"loop": true,
+"name": &"Fear Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_aufx3")
+}],
+"loop": true,
+"name": &"Fear Closed Blink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_pmtm2")
+}],
+"loop": true,
+"name": &"Fear Open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_hw2ce")
+}],
+"loop": true,
+"name": &"Fear Open Blink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_0gt2m")
+}],
+"loop": true,
+"name": &"Panic Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_h422y")
+}],
+"loop": true,
+"name": &"Panic Closed Blink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_plcq5")
+}],
+"loop": true,
+"name": &"Panic Open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_yqieu")
+}],
+"loop": true,
+"name": &"Panic Open Blink",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lsak7"]
@@ -65,7 +137,7 @@ shape = SubResource("CapsuleShape2D_vmmy4")
 position = Vector2(-3.8147e-06, -60.9995)
 scale = Vector2(0.45, 0.45)
 sprite_frames = SubResource("SpriteFrames_uxj2h")
-animation = &"Base Closed"
+animation = &"Base Open Blink"
 
 [node name="scream_timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -77,6 +149,9 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_lsak7")
 
+[node name="blink_timer" type="Timer" parent="."]
+
 [connection signal="timeout" from="scream_timer" to="." method="_on_scream_timer_timeout"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="timeout" from="blink_timer" to="." method="_on_blink_timer_timeout"]

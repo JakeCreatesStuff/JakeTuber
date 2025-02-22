@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cupft81hqtiv"
-path="res://.godot/imported/Base_Closed_Blink.png-6a5890a44d1325fcf0af257aaa2cfdda.ctex"
+uid="uid://cp8ih6csgal8r"
+path="res://.godot/imported/Fear_Open.png-1654463b6e6b217ddbdb2ad0d3996e8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Model Assets/Base_Closed_Blink.png"
-dest_files=["res://.godot/imported/Base_Closed_Blink.png-6a5890a44d1325fcf0af257aaa2cfdda.ctex"]
+source_file="res://Model Assets/Fear/Fear_Open.png"
+dest_files=["res://.godot/imported/Fear_Open.png-1654463b6e6b217ddbdb2ad0d3996e8a.ctex"]
 
 [params]
 
