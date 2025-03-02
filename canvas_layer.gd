@@ -12,9 +12,10 @@ func _process(delta):
 	pass
 
 func _chibi(message: String):
-	if chibi:
-		self.visible = true
-		chibi = false
-	else:
-		self.visible = false
-		chibi = true
+	pass
+	#if chibi:
+		#self.visible = true
+		#chibi = false
+	#else:
+		#self.visible = false
+		#chibi = true

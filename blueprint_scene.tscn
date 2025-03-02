@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgktyay56ywtb"]
+
+[ext_resource type="Texture2D" uid="uid://cqx6gk7t0vwho" path="res://Blueprint template.png" id="1_3f3in"]
+[ext_resource type="Script" path="res://blueprint_scene.gd" id="1_6mi50"]
+
+[node name="Blueprint Scene" type="Node2D"]
+script = ExtResource("1_6mi50")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Blueprint" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_3f3in")
+
+[node name="Line2D" type="Line2D" parent="."]

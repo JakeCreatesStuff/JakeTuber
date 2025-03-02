@@ -2,26 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s7j8q2wwuxuh"
-path="res://.godot/imported/Base 1.png-f62bc988bf5cd02b8222f7bb3fad105e.ctex"
+uid="uid://dmnbnxd73o6xm"
+path="res://.godot/imported/Starry_Closed.png-2becd42de9378a2f77fa3e190d767de5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Base 1.png"
-dest_files=["res://.godot/imported/Base 1.png-f62bc988bf5cd02b8222f7bb3fad105e.ctex"]
+source_file="res://Model Assets/Starry/Starry_Closed.png"
+dest_files=["res://.godot/imported/Starry_Closed.png-2becd42de9378a2f77fa3e190d767de5.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
-compress/lossy_quality=1.0
+compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

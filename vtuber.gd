@@ -33,26 +33,13 @@ var state_8 = "Base Open Blink"
 func _ready():
 	$blink_timer.start(randf_range(1,5))
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
-	ElgatoStreamDeck.on_key_down.connect(_chibi)
+	ElgatoStreamDeck.on_key_down.connect(_recieve)
 	
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	volume = input.mic_input
 	talking = input.talking
 	screaming = input.screaming
-	
-	if Input.is_action_just_pressed("state 1"):
-		expression = 1
-		expression_state(expression)
-	elif  Input.is_action_just_pressed("state 2"):
-		expression = 2
-		expression_state(expression)
-	elif  Input.is_action_just_pressed("state 3"):
-		expression = "2 scream"
-		expression_state(expression)
-		
-		
-	print(second_state)
 		
 	if talking:
 		open = true
@@ -81,15 +68,30 @@ func _physics_process(delta):
 		
 	move_and_slide()
 	
-func _chibi(message: String):
-	if chibi:
-		Input.mouse_mode=Input.MOUSE_MODE_HIDDEN
-		self.visible = false
-		chibi = false
-	else:
-		Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
-		self.visible = true
-		chibi = true
+func _recieve(message: String):
+	match message:
+		"_chibi":
+			if chibi:
+				Input.mouse_mode=Input.MOUSE_MODE_HIDDEN
+				#self.visible = true
+				chibi = false
+			else:
+				Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+				#self.visible = false
+				chibi = true
+				
+		"_state 1":
+			expression = 1
+			expression_state(expression)
+		"_state 2":
+			expression = 2
+			expression_state(expression)
+		"_state 3":
+			expression = 3
+			expression_state(expression)
+		"_state 4":
+			expression = 4
+			expression_state(expression)
 
 func expression_state(check):
 
@@ -98,6 +100,12 @@ func expression_state(check):
 			state_1 = "Base Closed"
 			state_2 = "Base Closed Blink"
 			state_3 = "Base Open"
+			state_4 = "Base Open Blink"
+			#print("state 1")
+		"1 scream":
+			state_1 = "Base Closed Blink"
+			state_2 = "Base Closed Blink"
+			state_3 = "Base Open Blink"
 			state_4 = "Base Open Blink"
 			#print("state 1")
 		2:
@@ -112,7 +120,18 @@ func expression_state(check):
 			state_3 = "Panic Open"
 			state_4 = "Panic Open Blink"
 			#print("state 2")
-
+		3:
+			state_1 = "Goggles Closed"
+			state_2 = "Goggles Closed"
+			state_3 = "Goggles Open"
+			state_4 = "Goggles Open"
+			#print("state 2")
+		4:
+			state_1 = "Starry Closed"
+			state_2 = "Starry Closed Blink"
+			state_3 = "Starry Open"
+			state_4 = "Starry Open Blink"
+			
 func _on_scream_timer_timeout():
 	expression_state(expression)
 	second_state = false
@@ -124,31 +143,3 @@ func _on_blink_timer_timeout():
 	await get_tree().create_timer(0.15).timeout
 	$blink_timer.start(randf_range(1,5))
 	blinking = false
-
-
-	#if talking:
-		#open = true
-		#
-		#if is_on_floor() and spoke == false:
-			#velocity.y = BOUNCE_VELOCITY
-			#spoke = true
-			#
-		#if screaming or second_state:
-				#if blinking:
-					#pass
-				#else:
-					#pass
-				#animated_sprite.play(state_4)
-				#$scream_timer.start()
-				#second_state = true
-		#else:
-			#animated_sprite.play(state_3)
-			#
-	#else:
-		#open = false
-		#spoke = false
-		#
-		#if second_state:
-			#animated_sprite.play(state_2)
-		#else:
-			#animated_sprite.play(state_1)

@@ -2,26 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bps2jybhy762h"
-path="res://.godot/imported/Angy 4.png-08bfc433c62008fef84f78f282fc72f0.ctex"
+uid="uid://ctvgv4oqagsjb"
+path="res://.godot/imported/Goggles_closed.png-87c0725927d5296aa3612e0d9132c31a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Angy 4.png"
-dest_files=["res://.godot/imported/Angy 4.png-08bfc433c62008fef84f78f282fc72f0.ctex"]
+source_file="res://Model Assets/Goggles/Goggles_closed.png"
+dest_files=["res://.godot/imported/Goggles_closed.png-87c0725927d5296aa3612e0d9132c31a.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
-compress/lossy_quality=1.0
+compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

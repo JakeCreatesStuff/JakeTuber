@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cm658svttj2ve"]
+[gd_scene load_steps=14 format=3 uid="uid://cm658svttj2ve"]
 
 [ext_resource type="PackedScene" uid="uid://0dpnqfep462o" path="res://vtuber.tscn" id="1_5nwn8"]
 [ext_resource type="Script" path="res://main.gd" id="1_yf8qn"]
 [ext_resource type="PackedScene" uid="uid://bb2av3e2g68yk" path="res://control.tscn" id="2_4kbgp"]
+[ext_resource type="PackedScene" uid="uid://bgktyay56ywtb" path="res://blueprint_scene.tscn" id="2_a5e7g"]
 [ext_resource type="Script" path="res://mic_input.gd" id="3_gjwa7"]
 [ext_resource type="PackedScene" uid="uid://dggqc3fiqx26" path="res://mic_input.tscn" id="3_mydk1"]
 [ext_resource type="PackedScene" uid="uid://cqctcbpfdt0uk" path="res://chibi_head.tscn" id="5_6um5i"]
@@ -14,21 +15,34 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kb3nj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6ipo"]
-radius = 104.0
-height = 768.0
+radius = 152.0
+height = 800.0
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_yf8qn")
+
+[node name="Blueprint Scene" parent="." instance=ExtResource("2_a5e7g")]
+visible = false
+top_level = true
 
 [node name="mic input" parent="." instance=ExtResource("3_mydk1")]
 script = ExtResource("3_gjwa7")
 
 [node name="Control" parent="." instance=ExtResource("2_4kbgp")]
+top_level = true
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 536.0
+offset_top = 200.0
+offset_right = 704.0
+offset_bottom = 288.0
+text = "SAVE"
+
 [node name="Mic Refresh" type="Timer" parent="."]
-wait_time = 300.0
+wait_time = 200.0
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -40,7 +54,7 @@ script = ExtResource("5_qxbxu")
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Chibi Head" parent="CanvasLayer2" instance=ExtResource("5_6um5i")]
-position = Vector2(1664, 256)
+position = Vector2(2136, -104)
 
 [node name="PointerFinger" parent="CanvasLayer2" instance=ExtResource("9_jgque")]
 position = Vector2(1312, 520)
@@ -64,14 +78,7 @@ input = NodePath("../../Control")
 position = Vector2(16, 0)
 shape = SubResource("CapsuleShape2D_n6ipo")
 
-[node name="Button" type="Button" parent="."]
-offset_left = 536.0
-offset_top = 200.0
-offset_right = 704.0
-offset_bottom = 288.0
-text = "SAVE"
-
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Mic Refresh" to="mic input" method="_on_mic_refresh_timeout"]
 [connection signal="mouse_entered" from="BodyScene/Area2D" to="BodyScene" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="BodyScene/Area2D" to="BodyScene" method="_on_area_2d_mouse_exited"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

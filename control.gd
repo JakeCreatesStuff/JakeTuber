@@ -7,6 +7,8 @@ signal talk_volume_reached
 var record_bus_index: int
 var spectrum_analyzer: AudioEffectSpectrumAnalyzerInstance
 
+var config = ConfigFile.new()
+
 var mic_input
 var mic_slider
 var scream_slider
@@ -23,9 +25,13 @@ const MIN_DB = 60
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	mic_slider = 0
-	time_slider = 0
-	scream_slider = 0
+	var err = config.load("res://savegame.cfg")
+	mic_slider = config.get_value("Control", "mic_slider")
+	time_slider = config.get_value("Control", "time_slider")
+	scream_slider = config.get_value("Control", "scream_slider")
+	$VBoxContainer/volume_selection.value = mic_slider
+	$VBoxContainer/scream_selection.value = scream_slider
+	$VBoxContainer/time_selection.value = time_slider
 	record_bus_index = AudioServer.get_bus_index("Record")
 	spectrum_analyzer = AudioServer.get_bus_effect_instance(record_bus_index, 1)
 
