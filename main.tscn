@@ -35,10 +35,9 @@ size_flags_vertical = 4
 
 [node name="Button" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 536.0
-offset_top = 200.0
-offset_right = 704.0
-offset_bottom = 288.0
+offset_top = 160.0
+offset_right = 128.0
+offset_bottom = 216.0
 text = "SAVE"
 
 [node name="Mic Refresh" type="Timer" parent="."]
